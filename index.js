@@ -1,11 +1,18 @@
 'use strict';
 
-const STORE = [
-  {name: "apples", checked: false},
-  {name: "oranges", checked: false},
-  {name: "milk", checked: true},
-  {name: "bread", checked: false}
-];
+//convert store array into object.
+
+  const STORE = {
+    items:
+    [
+      {name: "apples", checked: false},
+      {name: "oranges", checked: false},
+      {name: "milk", checked: true},
+      {name: "bread", checked: false}
+    ],
+  }
+
+
 
 function generateItemElement(item, itemIndex, template) {
   return `
@@ -33,13 +40,13 @@ function generateShoppingItemsString(shoppinglist){
 function renderShoppingList() {
 
   console.log('`renderShoppingList` ran');
-  const shoppingListItemsString = generateShoppingItemsString(STORE);
+  const shoppingListItemsString = generateShoppingItemsString(STORE.items);
   $('.js-shopping-list').html(shoppingListItemsString);
 }
 
 function addItemToShoppingList(itemName) {
   console.log(`Adding "${itemName}" to shopping list`);
-  STORE.push({name: itemName, checked: false});
+  STORE.items.push({name: itemName, checked: false});
 }
 
 function handleNewItemSubmit() {
@@ -56,7 +63,7 @@ function handleNewItemSubmit() {
 
 function toggleCheckedForListItem(itemIndex) {
   console.log("Toggling checked property for item at index " + itemIndex);
-  STORE[itemIndex].checked = !STORE[itemIndex].checked;
+  STORE.items[itemIndex].checked = !STORE.items[itemIndex].checked;
 }
 
 function getItemIndexFromElement(item) {
@@ -76,7 +83,8 @@ function handleItemCheckClicked() {
 
 function deleteListItem(itemIndex) {
   console.log("Deleting property for item at index " + itemIndex);
-  STORE.splice(itemIndex, 1);
+  //need to convert STORE from array to object.
+  STORE.items.splice(itemIndex, 1);
 }
 
 function handleDeleteItemClicked() {
