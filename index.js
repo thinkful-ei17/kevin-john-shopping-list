@@ -10,6 +10,7 @@
       {name: "milk", checked: true},
       {name: "bread", checked: false}
     ],
+    itemsHidden: false
   }
 
 
@@ -104,4 +105,9 @@ function handleShoppingList() {
 
 }
 
+function checkedItemsHide(){
+    $(`.checkbox`)on(`click`, ``)
+}
+
 $(handleShoppingList);
+
