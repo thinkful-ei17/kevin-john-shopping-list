@@ -10,10 +10,16 @@
       {name: "milk", checked: true},
       {name: "bread", checked: false}
     ],
-    itemsHidden: false
+    hideCheckedItems: false
   }
 
+  //STEP 1 keep a value in our STORE that represents whether or not the hidden items are showing, hideCheckedItems.
 
+  //STEP 2 we have a checkbox that can toggle itemsHidden to true. Toggle, meaning it can go true or false between check or uncheck. It will change the value.
+
+  //we have a value that represents whether or not we want to hide things, and we have a checkbox that can change that value. When that hideCheckedItems is true, we want to remove all elements with the checked property of true. Line 13 refers to whether or not checked items are visible.
+
+  //STEP 3 when you add or delete something, you re-render. so when you check or uncheck you re-render with the things you want to show. It's temporary. We still want to keep our items. We don't want to delete them. We simply want to render the page without them, but they should still exist.
 
 function generateItemElement(item, itemIndex, template) {
   return `
@@ -41,6 +47,7 @@ function generateShoppingItemsString(shoppinglist){
 function renderShoppingList() {
 
   console.log('`renderShoppingList` ran');
+  //here we are rendering the STORE items. Figure out how to subtract (or not render) those items that are checked hidden.
   const shoppingListItemsString = generateShoppingItemsString(STORE.items);
   $('.js-shopping-list').html(shoppingListItemsString);
 }
@@ -97,17 +104,25 @@ function handleDeleteItemClicked() {
   });
 }
 
+
+//when click on checkbox, something happens. console.log or something. $(checkbox).on('click')
+//how to change(Toggle that property)
+
+function handleCheckboxClick() {
+$('.checkbox').on('click',  event => {
+  STORE.hideCheckedItems = !STORE.hideCheckedItems;
+});
+}
+
+
+
 function handleShoppingList() {
   renderShoppingList();
   handleNewItemSubmit();
   handleItemCheckClicked();
   handleDeleteItemClicked();
-
+  handleCheckboxClick();
 }
 
-function checkedItemsHide(){
-    $(`.checkbox`)on(`click`, ``)
-}
 
 $(handleShoppingList);
-
