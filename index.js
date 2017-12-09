@@ -48,6 +48,15 @@ function renderShoppingList() {
 
   console.log('`renderShoppingList` ran');
   //here we are rendering the STORE items. Figure out how to subtract (or not render) those items that are checked hidden.
+  //if checked, console.log("hidden"). if not checked, then console.log("not hidden")
+  console.log(STORE.hideCheckedItems);
+  if (STORE.hideCheckedItems === true) {
+    console.log("We're hidden!");
+    //render the page without the checked items.
+
+  } else if (STORE.hideCheckedItems === false) {
+    console.log("Not hidden!");
+  }
   const shoppingListItemsString = generateShoppingItemsString(STORE.items);
   $('.js-shopping-list').html(shoppingListItemsString);
 }
@@ -79,7 +88,6 @@ function getItemIndexFromElement(item) {
   return parseInt(itemIndexString, 10);
 }
 
-
 function handleItemCheckClicked() {
   $('.js-shopping-list').on('click', `.js-item-toggle`, event => {
     console.log('`handleItemCheckClicked` ran');
@@ -108,12 +116,14 @@ function handleDeleteItemClicked() {
 //when click on checkbox, something happens. console.log or something. $(checkbox).on('click')
 //how to change(Toggle that property)
 
+//when you click something, all it does and change the store. the renderShoppingList() method simply takes the STORE and makes the right page for it.
+
 function handleCheckboxClick() {
 $('.checkbox').on('click',  event => {
   STORE.hideCheckedItems = !STORE.hideCheckedItems;
-});
+  renderShoppingList();
+  });
 }
-
 
 
 function handleShoppingList() {
