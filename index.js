@@ -36,6 +36,7 @@ function generateItemElement(item, itemIndex, template) {
   </li>`;
 }
 
+//generateShoppingItemsString takes an entire array and generates a string of HTML data.
 function generateShoppingItemsString(shoppinglist){
   console.log("Generating shopping list element");
 
@@ -50,14 +51,19 @@ function renderShoppingList() {
   //here we are rendering the STORE items. Figure out how to subtract (or not render) those items that are checked hidden.
   //if checked, console.log("hidden"). if not checked, then console.log("not hidden")
   console.log(STORE.hideCheckedItems);
+  //if hideCheckedItems flag is true, want to filter() the selection.
+  let lesserSTORE = STORE.items;
+  if( STORE.hideCheckedItems === true ) {
+    //filter items array
+    STORE.items.filter()
+  }
   if (STORE.hideCheckedItems === true) {
     console.log("We're hidden!");
-    //render the page without the checked items.
-
+    //render the page without the checked items. Generate less HTML by giving generateShoppingItemsString fewer items.
   } else if (STORE.hideCheckedItems === false) {
     console.log("Not hidden!");
   }
-  const shoppingListItemsString = generateShoppingItemsString(STORE.items);
+  const shoppingListItemsString = generateShoppingItemsString(lesserSTORE);
   $('.js-shopping-list').html(shoppingListItemsString);
 }
 
