@@ -13,6 +13,12 @@
     hideCheckedItems: false
   }
 
+  /*
+  User can edit an item title
+  User can press a toggle switch to show all items or show only items that are unchecked
+  User can type in a search term and get a filtered item list by title
+  */
+
   //STEP 1 keep a value in our STORE that represents whether or not the hidden items are showing, hideCheckedItems.
 
   //STEP 2 we have a checkbox that can toggle itemsHidden to true. Toggle, meaning it can go true or false between check or uncheck. It will change the value.
@@ -47,7 +53,6 @@ function generateShoppingItemsString(shoppinglist){
 
 function renderShoppingList() {
 
-  console.log('`renderShoppingList` ran');
   //here we are rendering the STORE items. Figure out how to subtract (or not render) those items that are checked hidden.
   //if checked, console.log("hidden"). if not checked, then console.log("not hidden")
   console.log(STORE.hideCheckedItems);
@@ -55,14 +60,11 @@ function renderShoppingList() {
   let lesserSTORE = STORE.items;
   if( STORE.hideCheckedItems === true ) {
     //filter items array
-    STORE.items.filter()
+  lesserSTORE = STORE.items.filter(item => {
+      return !item.checked;
+    })
   }
-  if (STORE.hideCheckedItems === true) {
-    console.log("We're hidden!");
-    //render the page without the checked items. Generate less HTML by giving generateShoppingItemsString fewer items.
-  } else if (STORE.hideCheckedItems === false) {
-    console.log("Not hidden!");
-  }
+
   const shoppingListItemsString = generateShoppingItemsString(lesserSTORE);
   $('.js-shopping-list').html(shoppingListItemsString);
 }
@@ -130,7 +132,6 @@ $('.checkbox').on('click',  event => {
   renderShoppingList();
   });
 }
-
 
 function handleShoppingList() {
   renderShoppingList();
